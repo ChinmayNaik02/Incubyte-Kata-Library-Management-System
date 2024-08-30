@@ -12,4 +12,8 @@ public class Book {
         this.author = author;
         this.publicationYear = publicationYear;
     }
+
+    public String getIsbn() {
+        return isbn;
+    }
 }
