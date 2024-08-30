@@ -19,5 +19,10 @@ class LibraryTest {
         assertFalse(library.isBookInLibrary("1234567890"));
     }
 
+    @Test
+    void testAddBookWithNullNameThrowsException() {
+        Library library = new Library();
+        assertThrows(Exception.class, () -> library.addBook(new Book(null, "1984", "George Orwell", 1949)));
+    }
 
 }
