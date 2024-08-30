@@ -9,4 +9,8 @@ public class Library {
 
     public void addBook(Book book) {
     }
+
+    public boolean isBookAvailable(String number) {
+        return true;
+    }
 }
