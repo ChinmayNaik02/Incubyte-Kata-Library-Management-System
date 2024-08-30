@@ -10,13 +10,13 @@ class LibraryTest {
         Library library = new Library();
         Book book = new Book("9788192910901", "1984", "George Orwell", 1949);
         library.addBook(book);
-        assertTrue(library.isBookAvailable("9788192910901"));
+        assertTrue(library.isBookInLibrary("9788192910901"));
     }
 
     @Test
     void returnsFalseIfBookIsAvailable() {
         Library library = new Library();
-        assertFalse(library.isBookAvailable("1234567890"));
+        assertFalse(library.isBookInLibrary("1234567890"));
     }
 
 
