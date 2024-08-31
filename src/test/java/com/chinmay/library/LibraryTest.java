@@ -78,4 +78,12 @@ class LibraryTest {
     void testBookBorrowedWithEmptyIsbnThrowsException() {
         assertThrows(IllegalArgumentException.class, ()->library.borrowBook(""));
     }
+
+    @Test
+    void testReturnedBookShouldBeAvailable() {
+        library.addBook("9788192910901", "1984", "George Orwell", 1949);
+        library.borrowBook("9788192910901");
+        library.returnBook("9788192910901");
+        assertTrue(library.isBookInLibrary("9788192910901"));
+    }
 }
