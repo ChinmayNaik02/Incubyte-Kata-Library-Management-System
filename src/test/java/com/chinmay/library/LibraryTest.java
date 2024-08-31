@@ -35,4 +35,10 @@ class LibraryTest {
         Library library = new Library();
         assertThrows(IllegalArgumentException.class, ()->library.addBook("9788192910901", "1984", null, 1949));
     }
+
+    @Test
+    void testAddBookWithEmptyIsbnThrowsException() {
+        Library library = new Library();
+        assertThrows(IllegalArgumentException.class, () -> library.addBook("", "1984", "George Orwell", 1949));
+    }
 }
