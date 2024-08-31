@@ -8,6 +8,8 @@ import com.chinmay.exceptions.BookRecordNotFound;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 class LibraryTest {
     Library library;
     
@@ -131,5 +133,18 @@ class LibraryTest {
 
         assertTrue(library.isBookAvailable("9788192910901"));
         assertTrue(library.isBookAvailable("9780385121675"));
+    }
+
+    @Test
+    void testAllAvailableBooksAreDisplayed() {
+        library.addBook("9788192910901", "1984", "George Orwell", 1949);
+        library.addBook("9780385121675","The Shining", "Stephen King",1977);
+        library.addBook("9780007124015", "The Lord of the Rings", "John Ronald Reuel Tolkien", 1954);
+
+        library.borrowBook("9788192910901");
+
+        List<Book> availableBooks = library.viewAvailableBooks();
+
+        assertEquals(2, availableBooks.size());
     }
 }
