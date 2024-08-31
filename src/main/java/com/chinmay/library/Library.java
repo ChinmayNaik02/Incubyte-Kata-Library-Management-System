@@ -27,4 +27,8 @@ public class Library {
             throw new IllegalArgumentException(errorMessage);
         }
     }
+
+    public void borrowBook(String isbn) {
+        books.remove(isbn);
+    }
 }
