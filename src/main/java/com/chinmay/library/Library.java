@@ -8,7 +8,13 @@ public class Library {
 
     public void addBook(Book book) {
         if (book.getIsbn() == null) {
+            throw new IllegalArgumentException("Book Isbn cannot be empty");
+        }
+        if (book.getTitle() == null){
             throw new IllegalArgumentException("Book title cannot be empty");
+        }
+        if (book.getAuthor() == null){
+            throw new IllegalArgumentException("Book author cannot be empty");
         }
         books.put(book.getIsbn(),book);
     }
