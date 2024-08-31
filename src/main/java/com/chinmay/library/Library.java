@@ -14,10 +14,11 @@ public class Library {
         Book book = new Book(isbn, title, author, publicationYear);
         validateBook(book);
         books.put(book.getIsbn(),book);
+        bookAvailability.put(isbn,true);
     }
 
     public boolean isBookInLibrary(String isbn) {
-        return books.containsKey(isbn);
+        return bookAvailability.getOrDefault(isbn,false);
     }
 
     private void validateBook(Book book) {
@@ -35,13 +36,13 @@ public class Library {
     public void borrowBook(String isbn) {
         checkNotNullOrEmpty(isbn, "Book ISBN cannot be null or empty");
 
-        if (!isBookInLibrary(isbn)) {
+        if (!bookAvailability.getOrDefault(isbn,false)) {
             throw new BookNotAvailableException("Book is not in library");
         }
-        books.remove(isbn);
+        bookAvailability.put(isbn,false);
     }
 
     public void returnBook(String isbn) {
-        books.put(isbn,null);  //Minimal Implementation
+        bookAvailability.put(isbn,true);  //Minimal Implementation
     }
 }
