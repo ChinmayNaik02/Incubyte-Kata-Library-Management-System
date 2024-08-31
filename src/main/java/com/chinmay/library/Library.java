@@ -8,8 +8,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Library {
-    private Map<String, Book> books = new HashMap<>();
-    private Map<String, Boolean> bookAvailability = new HashMap<>();
+    private static final String ERROR_MESSAGE_AUTHOR = "Book Author cannot be null or empty";
+    private static final String ERROR_MESSAGE_TITLE = "Book Title cannot be null or empty";
+    private static final String ERROR_MESSAGE_ISBN = "Book ISBN cannot be null or empty";
+    
+    private final Map<String, Book> books = new HashMap<>();
+    private final Map<String, Boolean> bookAvailability = new HashMap<>();
 
 
     public void addBook(String isbn, String title, String author, int publicationYear) {
@@ -19,40 +23,40 @@ public class Library {
         bookAvailability.put(isbn,true);
     }
 
-    public boolean isBookInLibrary(String isbn) {
+    public void borrowBook(String isbn) {
+        checkNotNullOrEmpty(isbn, ERROR_MESSAGE_ISBN);
+
+        if (Boolean.FALSE.equals(bookAvailability.getOrDefault(isbn,false))) {
+            throw new BookNotAvailableException(isbn);
+        }
+        bookAvailability.put(isbn,false);
+    }
+
+    public void returnBook(String isbn) {
+        checkNotNullOrEmpty(isbn, ERROR_MESSAGE_ISBN);
+
+        if (!books.containsKey(isbn)) {
+            throw new BookRecordNotFound(isbn);
+        }
+        if (Boolean.TRUE.equals(bookAvailability.get(isbn))) {
+            throw new BookAlreadyExists(isbn);
+        }
+        bookAvailability.put(isbn,true);
+    }
+
+    public boolean isBookAvailable(String isbn) {
         return bookAvailability.getOrDefault(isbn,false);
     }
 
     private void validateBook(Book book) {
-        checkNotNullOrEmpty(book.getIsbn(), "Book ISBN cannot be null or empty");
-        checkNotNullOrEmpty(book.getTitle(), "Book Title cannot be null or empty");
-        checkNotNullOrEmpty(book.getAuthor(), "Book Author cannot be null or empty");
+        checkNotNullOrEmpty(book.getIsbn(), ERROR_MESSAGE_ISBN);
+        checkNotNullOrEmpty(book.getTitle(), ERROR_MESSAGE_TITLE);
+        checkNotNullOrEmpty(book.getAuthor(), ERROR_MESSAGE_AUTHOR);
     }
 
     private void checkNotNullOrEmpty(String value, String errorMessage) {
         if (value == null || value.isEmpty()) {
             throw new IllegalArgumentException(errorMessage);
         }
-    }
-
-    public void borrowBook(String isbn) {
-        checkNotNullOrEmpty(isbn, "Book ISBN cannot be null or empty");
-
-        if (!bookAvailability.getOrDefault(isbn,false)) {
-            throw new BookNotAvailableException("Book is not in library");
-        }
-        bookAvailability.put(isbn,false);
-    }
-
-    public void returnBook(String isbn) {
-        checkNotNullOrEmpty(isbn, "Book ISBN cannot be null or empty");
-
-        if (!books.containsKey(isbn)) {
-            throw new BookRecordNotFound("The book doesn't exist in the library");
-        }
-        if (bookAvailability.get(isbn)) {
-            throw new BookAlreadyExists("Book Already exists in the library");
-        }
-        bookAvailability.put(isbn,true);
     }
 }

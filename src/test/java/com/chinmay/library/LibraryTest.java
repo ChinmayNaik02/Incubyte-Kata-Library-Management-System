@@ -19,12 +19,12 @@ class LibraryTest {
     @Test
     void returnsTrueIfBookIsAvailable() {
         library.addBook("9788192910901", "1984", "George Orwell", 1949);
-        assertTrue(library.isBookInLibrary("9788192910901"));
+        assertTrue(library.isBookAvailable("9788192910901"));
     }
 
     @Test
     void returnsFalseIfBookIsAvailable() {
-        assertFalse(library.isBookInLibrary("1234567890"));
+        assertFalse(library.isBookAvailable("1234567890"));
     }
 
     @Test
@@ -61,7 +61,7 @@ class LibraryTest {
     void testAllowToBorrowBookIfAvailable() {
         library.addBook("9788192910901", "1984", "George Orwell", 1949);
         library.borrowBook("9788192910901");
-        assertFalse(library.isBookInLibrary("9788192910901"));
+        assertFalse(library.isBookAvailable("9788192910901"));
     }
 
     @Test
@@ -86,7 +86,7 @@ class LibraryTest {
         library.addBook("9788192910901", "1984", "George Orwell", 1949);
         library.borrowBook("9788192910901");
         library.returnBook("9788192910901");
-        assertTrue(library.isBookInLibrary("9788192910901"));
+        assertTrue(library.isBookAvailable("9788192910901"));
     }
 
     @Test
