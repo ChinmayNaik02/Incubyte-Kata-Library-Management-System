@@ -99,4 +99,12 @@ class LibraryTest {
     void testReturningBookThatDoesNotExistThrowsException() {
         assertThrows(BookRecordNotFound.class, () -> library.returnBook("9788192910901"));
     }
+
+    @Test
+    void testReturningAlreadyReturnedBookThrowsException() {
+        library.addBook("9788192910901", "1984", "George Orwell", 1949);
+        library.borrowBook("9788192910901");
+        library.returnBook("9788192910901");
+        assertThrows(BookAlreadyExists.class, ()->library.returnBook("9788192910901"));
+    }
 }
