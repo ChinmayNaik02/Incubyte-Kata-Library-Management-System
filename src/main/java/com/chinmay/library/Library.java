@@ -20,10 +20,10 @@ public class Library {
         if (book.getIsbn() == null || book.getIsbn().isEmpty()) {
             throw new IllegalArgumentException("Book Isbn cannot be empty");
         }
-        if (book.getTitle() == null){
+        if (book.getTitle() == null || book.getTitle().isEmpty()){
             throw new IllegalArgumentException("Book title cannot be empty");
         }
-        if (book.getAuthor() == null){
+        if (book.getAuthor() == null || book.getAuthor().isEmpty()){
             throw new IllegalArgumentException("Book author cannot be empty");
         }
     }
