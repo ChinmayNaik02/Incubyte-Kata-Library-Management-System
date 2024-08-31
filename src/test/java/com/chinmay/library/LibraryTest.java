@@ -53,4 +53,12 @@ class LibraryTest {
         Library library = new Library();
         assertThrows(IllegalArgumentException.class, () -> library.addBook("9788192910901", "1984", "", 1949));
     }
+
+    @Test
+    void testAllowToBorrowBookIfAvailable() {
+        Library library = new Library();
+        library.addBook("9788192910901", "1984", "George Orwell", 1949);
+        library.borrowBook("9788192910901");
+        assertFalse(library.isBookInLibrary("9788192910901"));
+    }
 }
