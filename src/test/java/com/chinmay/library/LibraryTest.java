@@ -71,4 +71,10 @@ class LibraryTest {
         library.borrowBook("9788192910901");
         assertThrows(BookNotAvailableException.class, ()->library.borrowBook("9788192910901"));
     }
+
+    @Test
+    void testBookBorrowedWithNullIsbnThrowsException() {
+        Library library = new Library();
+        assertThrows(IllegalArgumentException.class, ()->library.borrowBook(null));
+    }
 }
