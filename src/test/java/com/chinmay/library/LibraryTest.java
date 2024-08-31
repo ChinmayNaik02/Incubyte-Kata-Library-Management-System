@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import com.chinmay.exceptions.BookAlreadyExists;
 import com.chinmay.exceptions.BookNotAvailableException;
+import com.chinmay.exceptions.BookRecordNotFound;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

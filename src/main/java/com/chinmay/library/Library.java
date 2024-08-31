@@ -47,6 +47,6 @@ public class Library {
         if (bookAvailability.getOrDefault(isbn,false)) {
             throw new BookAlreadyExists("Book Already exists in the library");
         }
-        bookAvailability.put(isbn,true);  //Minimal Implementation
+        bookAvailability.put(isbn,true);
     }
 }
