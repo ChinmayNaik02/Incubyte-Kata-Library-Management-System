@@ -147,4 +147,17 @@ class LibraryTest {
 
         assertEquals(2, availableBooks.size());
     }
+
+    @Test
+    void testNoBooksAreDisplayedWhenAllBooksAreBorrowed() {
+        library.addBook("9788192910901", "1984", "George Orwell", 1949);
+        library.addBook("9780385121675","The Shining", "Stephen King",1977);
+
+        library.borrowBook("9788192910901");
+        library.borrowBook("9780385121675");
+
+        List<Book> availableBooks = library.viewAvailableBooks();
+
+        assertTrue(availableBooks.isEmpty());
+    }
 }
