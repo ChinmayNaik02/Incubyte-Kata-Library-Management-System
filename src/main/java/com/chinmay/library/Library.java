@@ -2,6 +2,7 @@ package com.chinmay.library;
 
 import com.chinmay.exceptions.BookAlreadyExists;
 import com.chinmay.exceptions.BookNotAvailableException;
+import com.chinmay.exceptions.BookRecordNotFound;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -44,7 +45,10 @@ public class Library {
     }
 
     public void returnBook(String isbn) {
-        if (bookAvailability.getOrDefault(isbn,false)) {
+        if (!books.containsKey(isbn)) {
+            throw new BookRecordNotFound("The book doesn't exist in the library");
+        }
+        if (bookAvailability.get(isbn)) {
             throw new BookAlreadyExists("Book Already exists in the library");
         }
         bookAvailability.put(isbn,true);
