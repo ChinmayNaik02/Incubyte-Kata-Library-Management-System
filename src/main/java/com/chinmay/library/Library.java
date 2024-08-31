@@ -26,6 +26,10 @@ public class Library {
     public void borrowBook(String isbn) {
         checkNotNullOrEmpty(isbn, ERROR_MESSAGE_ISBN);
 
+        if (!books.containsKey(isbn)) {
+            throw new BookRecordNotFound(isbn);
+        }
+
         if (Boolean.FALSE.equals(bookAvailability.getOrDefault(isbn,false))) {
             throw new BookNotAvailableException(isbn);
         }

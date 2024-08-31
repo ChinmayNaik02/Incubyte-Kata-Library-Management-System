@@ -117,4 +117,19 @@ class LibraryTest {
     void testReturningBookWithEmptyIsbnThrowsException() {
         assertThrows(IllegalArgumentException.class, ()->library.returnBook(""));
     }
+
+    @Test
+    void testCanAddBorrowAndReturnMultipleBooks() {
+        library.addBook("9788192910901", "1984", "George Orwell", 1949);
+        library.addBook("9780385121675","The Shining", "Stephen King",1977);
+
+        library.borrowBook("9788192910901");
+        library.borrowBook("9780385121675");
+
+        library.returnBook("9788192910901");
+        library.returnBook("9780385121675");
+
+        assertTrue(library.isBookAvailable("9788192910901"));
+        assertTrue(library.isBookAvailable("9780385121675"));
+    }
 }
