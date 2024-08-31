@@ -61,4 +61,12 @@ class LibraryTest {
         library.borrowBook("9788192910901");
         assertFalse(library.isBookInLibrary("9788192910901"));
     }
+
+    @Test
+    void testThrowsExceptionIfUnavailableBookIsBorrowed() {
+        Library library = new Library();
+        library.addBook("9788192910901", "1984", "George Orwell", 1949);
+        library.borrowBook("9788192910901");
+        assertThrows(BookNotAvailableException.class, ()->library.borrowBook("9788192910901"));
+    }
 }
