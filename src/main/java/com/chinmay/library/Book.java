@@ -3,10 +3,10 @@ package com.chinmay.library;
 import static com.chinmay.validations.StringValidator.checkNotNullOrEmpty;
 
 public class Book {
-    private String isbn;
-    private String title;
-    private String author;
-    private int publicationYear;
+    private final String isbn;
+    private final String title;
+    private final String author;
+    private final int publicationYear;
 
     private static final String ERROR_MESSAGE_AUTHOR = "Book Author cannot be null or empty";
     private static final String ERROR_MESSAGE_TITLE = "Book Title cannot be null or empty";
@@ -24,5 +24,17 @@ public class Book {
 
     public String getIsbn() {
         return isbn;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public int getPublicationYear() {
+        return publicationYear;
     }
 }
