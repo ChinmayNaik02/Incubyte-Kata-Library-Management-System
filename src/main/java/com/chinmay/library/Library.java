@@ -45,6 +45,8 @@ public class Library {
     }
 
     public void returnBook(String isbn) {
+        checkNotNullOrEmpty(isbn, "Book ISBN cannot be null or empty");
+
         if (!books.containsKey(isbn)) {
             throw new BookRecordNotFound("The book doesn't exist in the library");
         }
