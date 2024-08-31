@@ -4,15 +4,14 @@ import com.chinmay.exceptions.BookAlreadyExists;
 import com.chinmay.exceptions.BookNotAvailableException;
 import com.chinmay.exceptions.BookRecordNotFound;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static com.chinmay.validations.StringValidator.checkNotNullOrEmpty;
+
 public class Library {
-    private static final String ERROR_MESSAGE_AUTHOR = "Book Author cannot be null or empty";
-    private static final String ERROR_MESSAGE_TITLE = "Book Title cannot be null or empty";
     private static final String ERROR_MESSAGE_ISBN = "Book ISBN cannot be null or empty";
     
     private final Map<String, Book> books = new HashMap<>();
@@ -21,7 +20,6 @@ public class Library {
 
     public void addBook(String isbn, String title, String author, int publicationYear) {
         Book book = new Book(isbn, title, author, publicationYear);
-        validateBook(book);
         books.put(book.getIsbn(),book);
         bookAvailability.put(isbn,true);
     }
@@ -61,17 +59,4 @@ public class Library {
     public boolean isBookAvailable(String isbn) {
         return bookAvailability.getOrDefault(isbn,false);
     }
-
-    private void validateBook(Book book) {
-        checkNotNullOrEmpty(book.getIsbn(), ERROR_MESSAGE_ISBN);
-        checkNotNullOrEmpty(book.getTitle(), ERROR_MESSAGE_TITLE);
-        checkNotNullOrEmpty(book.getAuthor(), ERROR_MESSAGE_AUTHOR);
-    }
-
-    private void checkNotNullOrEmpty(String value, String errorMessage) {
-        if (value == null || value.isEmpty()) {
-            throw new IllegalArgumentException(errorMessage);
-        }
-    }
-
 }
