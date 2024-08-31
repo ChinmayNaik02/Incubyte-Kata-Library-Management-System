@@ -4,7 +4,9 @@ import com.chinmay.exceptions.BookAlreadyExists;
 import com.chinmay.exceptions.BookNotAvailableException;
 import com.chinmay.exceptions.BookRecordNotFound;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Library {
@@ -48,6 +50,10 @@ public class Library {
         bookAvailability.put(isbn,true);
     }
 
+    public List<Book> viewAvailableBooks() {
+        return new ArrayList<>(books.values());
+    }
+
     public boolean isBookAvailable(String isbn) {
         return bookAvailability.getOrDefault(isbn,false);
     }
@@ -63,4 +69,5 @@ public class Library {
             throw new IllegalArgumentException(errorMessage);
         }
     }
+
 }
