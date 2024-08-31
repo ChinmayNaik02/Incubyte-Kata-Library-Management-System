@@ -93,4 +93,9 @@ class LibraryTest {
         library.addBook("9788192910901", "1984", "George Orwell", 1949);
         assertThrows(BookAlreadyExists.class, ()->library.returnBook("9788192910901"));
     }
+
+    @Test
+    void testReturningBookThatDoesNotExistThrowsException() {
+        assertThrows(BookRecordNotFound.class, () -> library.returnBook("9788192910901"));
+    }
 }
