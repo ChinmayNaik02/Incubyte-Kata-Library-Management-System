@@ -31,6 +31,8 @@ public class Library {
     }
 
     public void borrowBook(String isbn) {
+        checkNotNullOrEmpty(isbn, "Book ISBN cannot be null or empty");
+
         if (!isBookInLibrary(isbn)) {
             throw new BookNotAvailableException("Book is not in library");
         }
