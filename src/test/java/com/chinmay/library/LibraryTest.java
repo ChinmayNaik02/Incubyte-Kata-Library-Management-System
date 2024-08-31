@@ -1,6 +1,8 @@
 package com.chinmay.library;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import com.chinmay.exceptions.BookNotAvailableException;
 import org.junit.jupiter.api.Test;
 
 class LibraryTest {
