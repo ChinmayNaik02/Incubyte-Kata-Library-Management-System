@@ -7,6 +7,8 @@ import java.util.Map;
 
 public class Library {
     private Map<String, Book> books = new HashMap<>();
+    private Map<String, Boolean> bookAvailability = new HashMap<>();
+
 
     public void addBook(String isbn, String title, String author, int publicationYear) {
         Book book = new Book(isbn, title, author, publicationYear);
