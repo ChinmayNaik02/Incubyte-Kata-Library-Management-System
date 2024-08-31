@@ -107,4 +107,14 @@ class LibraryTest {
         library.returnBook("9788192910901");
         assertThrows(BookAlreadyExists.class, ()->library.returnBook("9788192910901"));
     }
+
+    @Test
+    void testReturningBookWithNullIsbnThrowsException() {
+        assertThrows(IllegalArgumentException.class, ()->library.returnBook(null));
+    }
+
+    @Test
+    void testReturningBookWithEmptyIsbnThrowsException() {
+        assertThrows(IllegalArgumentException.class, ()->library.returnBook(""));
+    }
 }
