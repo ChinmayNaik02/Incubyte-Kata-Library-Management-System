@@ -17,7 +17,7 @@ public class Library {
     }
 
     private void validateBook(Book book) {
-        if (book.getIsbn() == null) {
+        if (book.getIsbn() == null || book.getIsbn().isEmpty()) {
             throw new IllegalArgumentException("Book Isbn cannot be empty");
         }
         if (book.getTitle() == null){
