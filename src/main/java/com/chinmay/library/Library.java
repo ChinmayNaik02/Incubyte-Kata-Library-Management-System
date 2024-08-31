@@ -38,4 +38,8 @@ public class Library {
         }
         books.remove(isbn);
     }
+
+    public void returnBook(String isbn) {
+        books.put(isbn,null);  //Minimal Implementation
+    }
 }
