@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Library {
     private static final String ERROR_MESSAGE_AUTHOR = "Book Author cannot be null or empty";
@@ -51,7 +52,10 @@ public class Library {
     }
 
     public List<Book> viewAvailableBooks() {
-        return new ArrayList<>(books.values());
+        return books.values()
+                .stream()
+                .filter(book -> bookAvailability.getOrDefault(book.getIsbn(),false))
+                .collect(Collectors.toList());
     }
 
     public boolean isBookAvailable(String isbn) {
