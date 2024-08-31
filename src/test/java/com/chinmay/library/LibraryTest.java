@@ -73,4 +73,9 @@ class LibraryTest {
     void testBookBorrowedWithNullIsbnThrowsException() {
         assertThrows(IllegalArgumentException.class, ()->library.borrowBook(null));
     }
+
+    @Test
+    void testBookBorrowedWithEmptyIsbnThrowsException() {
+        assertThrows(IllegalArgumentException.class, ()->library.borrowBook(""));
+    }
 }
