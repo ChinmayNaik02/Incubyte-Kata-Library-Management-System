@@ -1,5 +1,6 @@
 package com.chinmay.library;
 
+import com.chinmay.exceptions.BookAlreadyExists;
 import com.chinmay.exceptions.BookNotAvailableException;
 
 import java.util.HashMap;
@@ -43,6 +44,9 @@ public class Library {
     }
 
     public void returnBook(String isbn) {
+        if (bookAvailability.getOrDefault(isbn,false)) {
+            throw new BookAlreadyExists("Book Already exists in the library");
+        }
         bookAvailability.put(isbn,true);  //Minimal Implementation
     }
 }
