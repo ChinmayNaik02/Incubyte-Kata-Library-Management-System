@@ -1,5 +1,7 @@
 package com.chinmay.library;
 
+import com.chinmay.exceptions.BookNotAvailableException;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,6 +31,9 @@ public class Library {
     }
 
     public void borrowBook(String isbn) {
+        if (!isBookInLibrary(isbn)) {
+            throw new BookNotAvailableException("Book is not in library");
+        }
         books.remove(isbn);
     }
 }
