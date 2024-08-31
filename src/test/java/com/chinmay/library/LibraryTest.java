@@ -86,4 +86,11 @@ class LibraryTest {
         library.returnBook("9788192910901");
         assertTrue(library.isBookInLibrary("9788192910901"));
     }
+
+    @Test
+    void testReturningAlreadyPresentBookThrowsException() {
+        library.addBook("9788192910901", "1984", "George Orwell", 1949);
+        library.borrowBook("9788192910901");
+        assertThrows(BookAlreadyExists.class, ()->library.returnBook("9788192910901"));
+    }
 }
