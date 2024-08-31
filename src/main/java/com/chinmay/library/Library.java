@@ -17,14 +17,14 @@ public class Library {
     }
 
     private void validateBook(Book book) {
-        if (book.getIsbn() == null || book.getIsbn().isEmpty()) {
-            throw new IllegalArgumentException("Book Isbn cannot be empty");
-        }
-        if (book.getTitle() == null || book.getTitle().isEmpty()){
-            throw new IllegalArgumentException("Book title cannot be empty");
-        }
-        if (book.getAuthor() == null || book.getAuthor().isEmpty()){
-            throw new IllegalArgumentException("Book author cannot be empty");
+        checkNotNullOrEmpty(book.getIsbn(), "Book ISBN cannot be null or empty");
+        checkNotNullOrEmpty(book.getTitle(), "Book Title cannot be null or empty");
+        checkNotNullOrEmpty(book.getAuthor(), "Book Author cannot be null or empty");
+    }
+
+    private void checkNotNullOrEmpty(String value, String errorMessage) {
+        if (value == null || value.isEmpty()) {
+            throw new IllegalArgumentException(errorMessage);
         }
     }
 }
