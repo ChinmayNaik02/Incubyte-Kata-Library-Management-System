@@ -74,6 +74,11 @@ class LibraryTest {
     }
 
     @Test
+    void testBorrowingBookThatDoesNotExistThrowsException() {
+        assertThrows(BookRecordNotFound.class, ()->library.borrowBook("1234567890"));
+    }
+
+    @Test
     void testBookBorrowedWithNullIsbnThrowsException() {
         assertThrows(IllegalArgumentException.class, ()->library.borrowBook(null));
     }
@@ -138,14 +143,13 @@ class LibraryTest {
     @Test
     void testAllAvailableBooksAreDisplayed() {
         library.addBook("9788192910901", "1984", "George Orwell", 1949);
-        library.addBook("9780385121675","The Shining", "Stephen King",1977);
         library.addBook("9780007124015", "The Lord of the Rings", "John Ronald Reuel Tolkien", 1954);
 
         library.borrowBook("9788192910901");
 
         List<Book> availableBooks = library.viewAvailableBooks();
 
-        assertEquals(2, availableBooks.size());
+        assertEquals(1, availableBooks.size());
     }
 
     @Test
@@ -159,5 +163,43 @@ class LibraryTest {
         List<Book> availableBooks = library.viewAvailableBooks();
 
         assertTrue(availableBooks.isEmpty());
+    }
+
+    @Test
+    void testAllAvailableBooksAreDisplayedWhenMultipleBooksAreAvailable() {
+        library.addBook("9788192910901", "1984", "George Orwell", 1949);
+        library.addBook("9780385121675","The Shining", "Stephen King",1977);
+
+        List<Book> availableBooks = library.viewAvailableBooks();
+
+        assertTrue(availableBooks.stream().anyMatch(book -> book.getIsbn().equals("9788192910901")));
+        assertTrue(availableBooks.stream().anyMatch(book -> book.getIsbn().equals("9780385121675")));
+    }
+
+    @Test
+    void testAllAvailableBooksAreDisplayedWhenSomeBooksAreBorrowed() {
+        library.addBook("9788192910901", "1984", "George Orwell", 1949);
+        library.addBook("9780385121675","The Shining", "Stephen King",1977);
+
+        library.borrowBook("9788192910901");
+
+        List<Book> availableBooks = library.viewAvailableBooks();
+
+        assertTrue(availableBooks.stream().anyMatch(book -> book.getIsbn().equals("9780385121675")));
+    }
+
+    @Test
+    void testAllAvailableBooksAreDisplayedWhenSomeBooksAreReturned() {
+        library.addBook("9788192910901", "1984", "George Orwell", 1949);
+        library.addBook("9780385121675","The Shining", "Stephen King",1977);
+
+        library.borrowBook("9788192910901");
+
+        library.returnBook("9788192910901");
+
+        List<Book> availableBooks = library.viewAvailableBooks();
+
+        assertTrue(availableBooks.stream().anyMatch(book -> book.getIsbn().equals("9788192910901")));
+        assertTrue(availableBooks.stream().anyMatch(book -> book.getIsbn().equals("9780385121675")));
     }
 }
